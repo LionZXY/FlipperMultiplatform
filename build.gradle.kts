@@ -44,6 +44,7 @@ dependencies {
     implementation(libs.flipper.protobuf)
 
     implementation(libs.jserial)
+    implementation(libs.fastutil)
 }
 
 compose.desktop {

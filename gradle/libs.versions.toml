@@ -15,6 +15,7 @@ ksp = "1.9.20-1.0.14" # https://github.com/google/ksp/releases
 flipper-protobuf = "0.20.0-0.3.0"
 protobuf = "3.24.0" # https://github.com/protocolbuffers/protobuf/releases
 jserial = "2.10.3"
+fastutil = "8.5.12" # https://github.com/vigna/fastutil/tags
 
 
 [libraries]
@@ -46,6 +47,9 @@ protobuf-protoc = { module = "com.google.protobuf:protoc", version.ref = "protob
 flipper-protobuf = { module = "com.github.flipperdevices:flipperzero-protobuf-jvm", version.ref = "flipper-protobuf" }
 
 jserial = { module = "com.fazecast:jSerialComm", version.ref = "jserial" }
+
+fastutil = { module = "it.unimi.dsi:fastutil", version.ref = "fastutil" }
+
 
 [plugins]
 
