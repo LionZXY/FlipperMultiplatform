@@ -137,62 +137,62 @@ data class FlipperTypography(
     ),
     val updateButton40: TextStyle = TextStyle(
         fontSize = 40.sp,
-        fontFamily = FontFamily(Font(resource = "font/flipper_bold")),
+        fontFamily = FontFamily(Font(resource = "font/flipper_bold.ttf")),
         fontWeight = FontWeight.W400
     ),
     val updateText40: TextStyle = TextStyle(
         fontSize = 40.sp,
-        fontFamily = FontFamily(Font(resource = "font/flipper")),
+        fontFamily = FontFamily(Font(resource = "font/flipper.ttf")),
         fontWeight = FontWeight.W400
     ),
     val flipperAction: TextStyle = TextStyle(
         fontSize = 24.sp,
-        fontFamily = FontFamily(Font(resource = "font/flipper_action")),
+        fontFamily = FontFamily(Font(resource = "font/flipper_action.ttf")),
         fontWeight = FontWeight.W500
     ),
     val monoSpaceM14: TextStyle = TextStyle(
         fontSize = 14.sp,
-        fontFamily = FontFamily(Font(resource = "font/roboto_mono_medium")),
+        fontFamily = FontFamily(Font(resource = "font/roboto_mono_medium.ttf")),
         fontWeight = FontWeight.W500
     ),
     val monoSpaceM10: TextStyle = TextStyle(
         fontSize = 10.sp,
-        fontFamily = FontFamily(Font(resource = "font/roboto_mono_medium")),
+        fontFamily = FontFamily(Font(resource = "font/roboto_mono_medium.ttf")),
         fontWeight = FontWeight.W500
     ),
     val monoSpaceM12: TextStyle = TextStyle(
         fontSize = 12.sp,
-        fontFamily = FontFamily(Font(resource = "font/roboto_mono_medium")),
+        fontFamily = FontFamily(Font(resource = "font/roboto_mono_medium.ttf")),
         fontWeight = FontWeight.W500
     ),
     val monoSpaceM16: TextStyle = TextStyle(
         fontSize = 16.sp,
-        fontFamily = FontFamily(Font(resource = "font/roboto_mono_medium")),
+        fontFamily = FontFamily(Font(resource = "font/roboto_mono_medium.ttf")),
         fontWeight = FontWeight.W500
     ),
     val monoSpaceR12: TextStyle = TextStyle(
         fontSize = 12.sp,
-        fontFamily = FontFamily(Font(resource = "font/roboto_mono_medium")),
+        fontFamily = FontFamily(Font(resource = "font/roboto_mono_medium.ttf")),
         fontWeight = FontWeight.W400
     ),
     val notificationB8: TextStyle = TextStyle(
         fontSize = 8.sp,
-        fontFamily = FontFamily(Font(resource = "font/roboto_mono_medium")),
+        fontFamily = FontFamily(Font(resource = "font/roboto_mono_medium.ttf")),
         fontWeight = FontWeight.W700
     ),
     val fapHubButtonText: TextStyle = TextStyle(
         fontSize = 18.sp,
-        fontFamily = FontFamily(Font(resource = "font/flipper_action")),
+        fontFamily = FontFamily(Font(resource = "font/flipper_action.ttf")),
         fontWeight = FontWeight.W500
     ),
     val fapHubButtonProgressText: TextStyle = TextStyle(
         fontSize = 18.sp,
-        fontFamily = FontFamily(Font(resource = "font/flipper")),
+        fontFamily = FontFamily(Font(resource = "font/flipper.ttf")),
         fontWeight = FontWeight.W500
     ),
     val infraredEditButton: TextStyle = TextStyle(
         fontSize = 32.sp,
-        fontFamily = FontFamily(Font(resource = "font/flipper")),
+        fontFamily = FontFamily(Font(resource = "font/flipper.ttf")),
         fontWeight = FontWeight.W400
     ),
 )
@@ -202,16 +202,16 @@ fun getTypography(): FlipperTypography {
 }
 
 internal val robotoFamily = FontFamily(
-    Font(resource = "font/roboto_regular", FontWeight.W400),
-    Font(resource = "font/roboto_italic", FontWeight.W400, FontStyle.Italic),
-    Font(resource = "font/roboto_black", FontWeight.W900),
-    Font(resource = "font/roboto_black_italic", FontWeight.W900, FontStyle.Italic),
-    Font(resource = "font/roboto_light", FontWeight.W300),
-    Font(resource = "font/roboto_light_italic", FontWeight.W300, FontStyle.Italic),
-    Font(resource = "font/roboto_medium", FontWeight.W500),
-    Font(resource = "font/roboto_medium_italic", FontWeight.W500, FontStyle.Italic),
-    Font(resource = "font/roboto_bold", FontWeight.W700),
-    Font(resource = "font/roboto_bold_italic", FontWeight.W700, FontStyle.Italic),
-    Font(resource = "font/roboto_thin", FontWeight.W100),
-    Font(resource = "font/roboto_thin_italic", FontWeight.W100, FontStyle.Italic)
+    Font(resource = "font/roboto_regular.ttf", FontWeight.W400),
+    Font(resource = "font/roboto_italic.ttf", FontWeight.W400, FontStyle.Italic),
+    Font(resource = "font/roboto_black.ttf", FontWeight.W900),
+    Font(resource = "font/roboto_black_italic.ttf", FontWeight.W900, FontStyle.Italic),
+    Font(resource = "font/roboto_light.ttf", FontWeight.W300),
+    Font(resource = "font/roboto_light_italic.ttf", FontWeight.W300, FontStyle.Italic),
+    Font(resource = "font/roboto_medium.ttf", FontWeight.W500),
+    Font(resource = "font/roboto_medium_italic.ttf", FontWeight.W500, FontStyle.Italic),
+    Font(resource = "font/roboto_bold.ttf", FontWeight.W700),
+    Font(resource = "font/roboto_bold_italic.ttf", FontWeight.W700, FontStyle.Italic),
+    Font(resource = "font/roboto_thin.ttf", FontWeight.W100),
+    Font(resource = "font/roboto_thin_italic.ttf", FontWeight.W100, FontStyle.Italic)
 )

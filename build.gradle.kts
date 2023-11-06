@@ -17,6 +17,11 @@ dependencies {
     implementation(compose.desktop.currentOs)
 
     implementation(libs.compose.kamel)
+    implementation(libs.compose.paging)
+
+    implementation(libs.ktor.client)
+    implementation(libs.ktor.negotiation)
+    implementation(libs.ktor.serialization)
 
     implementation(libs.kotlin.immutable.collections)
     implementation(libs.kotlin.serialization.json)

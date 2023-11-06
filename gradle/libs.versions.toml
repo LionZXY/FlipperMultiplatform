@@ -5,9 +5,11 @@ kotlin-immutable-collections = "0.3.6" # https://github.com/Kotlin/kotlinx.colle
 ktor = "2.3.5" # https://ktor.io/
 serialization-json = "1.6.0" # https://github.com/Kotlin/kotlinx.serialization/releases
 kamel = "0.8.3"
+compose-paging = "3.3.0-alpha02"
 
 [libraries]
 compose-kamel = { module = "media.kamel:kamel-image", version.ref = "kamel" }
+compose-paging = { module = "androidx.paging:paging-common", version.ref = "compose-paging" }
 kotlin-immutable-collections = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable", version.ref = "kotlin-immutable-collections" }
 
 kotlin-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serialization-json" }

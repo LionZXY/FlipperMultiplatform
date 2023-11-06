@@ -5,6 +5,8 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
+import com.flipperdevices.core.ui.theme.FlipperTheme
+import com.flipperdevices.faphub.appcard.composable.AppCard
 import io.kamel.core.config.KamelConfig
 import io.kamel.core.config.takeFrom
 import io.kamel.image.config.Default
@@ -16,7 +18,9 @@ import io.kamel.image.config.resourcesFetcher
 @Preview
 fun App(kamelConfig: KamelConfig) {
     CompositionLocalProvider(LocalKamelConfig provides kamelConfig) {
-
+        FlipperTheme {
+            AppCard(null) { }
+        }
     }
 }
 

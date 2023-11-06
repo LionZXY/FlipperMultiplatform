@@ -1,26 +1,27 @@
 package com.flipperdevices.faphub.appcard.composable.paging
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.material.Divider
+import androidx.compose.material.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.itemContentType
 import androidx.paging.compose.itemKey
-import com.flipperdevices.core.ui.ktx.image.ComposeLottiePic
 import com.flipperdevices.core.ui.theme.LocalPallet
 import com.flipperdevices.faphub.appcard.composable.AppCard
 import com.flipperdevices.faphub.dao.api.model.FapItemShort
 import com.flipperdevices.faphub.errors.api.FapErrorSize
 import com.flipperdevices.faphub.errors.api.FapHubComposableErrorsRenderer
-import com.flipperdevices.core.ui.res.R as DesignSystem
 
 private const val DEFAULT_FAP_COUNT = 20
 
@@ -138,11 +139,11 @@ private fun ComposableLoadingItem() {
         modifier = Modifier.fillMaxWidth(),
         contentAlignment = Alignment.Center
     ) {
-        ComposeLottiePic(
-            picModifier = Modifier.padding(24.dp),
-            picResId = DesignSystem.raw.dots_loader,
-            rollBackPicResId = DesignSystem.drawable.pic_loader,
-            tint = LocalPallet.current.fapHubDividerColor
+        Icon(
+            modifier = Modifier.padding(24.dp),
+            painter = painterResource("drawable/pic_loader.xml"),
+            tint = LocalPallet.current.fapHubDividerColor,
+            contentDescription = null
         )
     }
 }
