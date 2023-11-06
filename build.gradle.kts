@@ -3,6 +3,7 @@ import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 plugins {
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.compose.multiplatform)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 group = "com.lionzxy"
@@ -14,6 +15,11 @@ dependencies {
     // (in a separate module for demo project and in testMain).
     // With compose.desktop.common you will also lose @Preview functionality
     implementation(compose.desktop.currentOs)
+
+    implementation(libs.compose.kamel)
+
+    implementation(libs.kotlin.immutable.collections)
+    implementation(libs.kotlin.serialization.json)
 }
 
 compose.desktop {
