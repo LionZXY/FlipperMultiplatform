@@ -39,11 +39,7 @@ class USBSerialConnectionHolder : FlipperServiceApi, FlipperConnectionInformatio
         scope = scope,
         requestStorage = requestStorage
     )
-    override val flipperVersionApi = FlipperInformationFetcher(
-        connectionInformationApi = connectionInformationApi,
-        requestApi = requestApi,
-        scope = scope
-    )
+    override val flipperVersionApi = FlipperInformationFetcher()
 
 
     fun init() {
