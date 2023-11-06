@@ -4,6 +4,8 @@ plugins {
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.compose.multiplatform)
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.kotlin.ksp)
+    alias(libs.plugins.ktorfit)
 }
 
 group = "com.lionzxy"
@@ -18,13 +20,23 @@ dependencies {
 
     implementation(libs.compose.kamel)
     implementation(libs.compose.paging)
+    implementation(libs.compose.decompose)
 
     implementation(libs.ktor.client)
     implementation(libs.ktor.negotiation)
+    implementation(libs.ktor.logging)
     implementation(libs.ktor.serialization)
 
     implementation(libs.kotlin.immutable.collections)
     implementation(libs.kotlin.serialization.json)
+    implementation(libs.kotlin.datetime)
+
+
+    implementation(libs.koin.core)
+    implementation(libs.koin.compose)
+
+    implementation(libs.ktorfit.lib)
+    ksp(libs.ktorfit.ksp)
 }
 
 compose.desktop {

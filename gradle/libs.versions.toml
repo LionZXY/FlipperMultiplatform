@@ -2,17 +2,26 @@
 kotlin-general = "1.9.20"
 compose-multiplatform = "1.5.10"
 kotlin-immutable-collections = "0.3.6" # https://github.com/Kotlin/kotlinx.collections.immutable/releases
+kotlin-datetime = "0.4.1" # https://github.com/Kotlin/kotlinx-datetime/releases
 ktor = "2.3.5" # https://ktor.io/
 serialization-json = "1.6.0" # https://github.com/Kotlin/kotlinx.serialization/releases
 kamel = "0.8.3"
 compose-paging = "3.3.0-alpha02"
+decompose = "2.2.0-alpha04"
+koin-core = "3.5.0"
+koin-compose = "1.1.0"
+ktorfit = "1.9.1" # https://github.com/Foso/Ktorfit/releases
+ksp = "1.9.20-1.0.14" # https://github.com/google/ksp/releases
+
 
 [libraries]
 compose-kamel = { module = "media.kamel:kamel-image", version.ref = "kamel" }
 compose-paging = { module = "androidx.paging:paging-common", version.ref = "compose-paging" }
-kotlin-immutable-collections = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable", version.ref = "kotlin-immutable-collections" }
+compose-decompose = { module = "com.arkivanov.decompose:decompose", version.ref = "decompose" }
 
+kotlin-immutable-collections = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable", version.ref = "kotlin-immutable-collections" }
 kotlin-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serialization-json" }
+kotlin-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlin-datetime" }
 
 # Ktor
 ktor-client = { module = "io.ktor:ktor-client-android", version.ref = "ktor" }
@@ -21,9 +30,16 @@ ktor-serialization = { module = "io.ktor:ktor-serialization-kotlinx-json", versi
 ktor-logging = { module = "io.ktor:ktor-client-logging-jvm", version.ref = "ktor" }
 ktor-mock = { module = "io.ktor:ktor-client-mock", version.ref = "ktor" }
 
+koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin-core" }
+koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koin-compose" }
+
+ktorfit-ksp = { module = "de.jensklingenberg.ktorfit:ktorfit-ksp", version.ref = "ktorfit" }
+ktorfit-lib = { module = "de.jensklingenberg.ktorfit:ktorfit-lib", version.ref = "ktorfit" }
+
 [plugins]
 
 compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "compose-multiplatform" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin-general" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin-general" }
-
+kotlin-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+ktorfit = { id = "de.jensklingenberg.ktorfit", version.ref = "ktorfit" }
