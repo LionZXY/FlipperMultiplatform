@@ -24,12 +24,15 @@ import com.flipperdevices.faphub.target.flipperTargetKoin
 import com.flipperdevices.main.impl.mainScreenKoin
 import com.lionzxy.flipperapp.navigation.DefaultRootComponent
 import com.lionzxy.flipperapp.navigation.RootContent
+import io.kamel.core.config.DefaultHttpCacheSize
 import io.kamel.core.config.KamelConfig
+import io.kamel.core.config.httpFetcher
 import io.kamel.core.config.takeFrom
 import io.kamel.image.config.Default
 import io.kamel.image.config.LocalKamelConfig
 import io.kamel.image.config.batikSvgDecoder
 import io.kamel.image.config.resourcesFetcher
+import io.ktor.client.plugins.logging.*
 import org.koin.compose.KoinApplication
 import org.koin.compose.KoinContext
 import org.koin.compose.koinInject
@@ -67,7 +70,15 @@ fun main() {
         resourcesFetcher()
         // Available only on Desktop.
         // An alternative svg decoder
-        batikSvgDecoder()
+        //batikSvgDecoder()
+        httpFetcher {
+            httpCache(DefaultHttpCacheSize)
+            Logging {
+                level = LogLevel.INFO
+                logger = Logger.SIMPLE
+            }
+        }
+
     }
     val koin = startKoin {
         modules(

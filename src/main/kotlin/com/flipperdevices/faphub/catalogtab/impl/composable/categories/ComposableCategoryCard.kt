@@ -21,6 +21,7 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.FilterQuality
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import com.flipperdevices.core.ui.ktx.image.DataSourceFormat
 import com.flipperdevices.core.ui.ktx.image.FlipperAsyncImage
 import com.flipperdevices.core.ui.ktx.placeholderConnecting
 import com.flipperdevices.core.ui.theme.LocalPallet
@@ -92,7 +93,8 @@ fun ComposableCategoryIcon(
                 colorFilter = ColorFilter.tint(LocalPallet.current.text100),
                 filterQuality = FilterQuality.None,
                 onLoading = { isPlaceholderActive = it },
-                cacheKey = category.name
+                cacheKey = category.name,
+                forceFormat = DataSourceFormat.SVG
             )
         }
     }

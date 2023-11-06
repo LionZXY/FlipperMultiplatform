@@ -29,9 +29,13 @@ fun FlipperAsyncImage(
     colorFilter: ColorFilter? = null,
     cacheKey: String? = url,
     onError: (() -> Unit)? = null,
+    forceFormat: DataSourceFormat? = null,
 ) {
-    val painterResource: Resource<Painter> = asyncPainterResource(url) {
-
+    val painterResource: Resource<Painter> = flipperAsyncPainterResource(
+        url,
+        filterQuality = filterQuality,
+        dataSourceFormat = forceFormat
+    ) {
         // CoroutineContext to be used while loading the image.
         coroutineContext = Job() + Dispatchers.IO
 
@@ -52,6 +56,7 @@ fun FlipperAsyncImage(
         contentAlignment = Alignment.Center,
         onLoading = { onLoading(true) },
         onFailure = {
+            it.printStackTrace()
             onLoading(false)
             onError?.invoke()
         },
@@ -61,3 +66,4 @@ fun FlipperAsyncImage(
         },
     )
 }
+
