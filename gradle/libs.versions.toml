@@ -1,0 +1,12 @@
+[versions]
+kotlin-general = "1.9.20"
+compose-multiplatform = "1.5.10"
+
+[libraries]
+
+
+[plugins]
+
+compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "compose-multiplatform" }
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin-general" }
+
