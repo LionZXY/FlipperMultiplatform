@@ -2,6 +2,7 @@ package com.flipperdevices.main.impl.api
 
 import androidx.compose.runtime.Composable
 import com.arkivanov.decompose.ComponentContext
+import com.flipperdevices.faphub.catalogtab.api.CatalogTabApi
 import com.flipperdevices.main.impl.composable.ComposableFapHubMainScreen
 import com.lionzxy.flipperapp.navigation.DecomposeComponent
 import org.koin.core.Koin
@@ -29,17 +30,14 @@ class FapHubMainScreenComponent(
                 //navController.popBackStack()
             },
             catalogTabComposable = {
-                /*
-                catalogTabApi.ComposableCatalogTab(
+                koin.get<CatalogTabApi>().ComposableCatalogTab(
                     onOpenFapItem = {
-                        metricApi.reportSimpleEvent(SimpleEvent.OPEN_FAPHUB_APP, it.applicationAlias)
-                        navController.navigate(fapScreenApi.getFapScreen(it.id))
+                        //navController.navigate(fapScreenApi.getFapScreen(it.id))
                     },
                     onCategoryClick = {
-                        metricApi.reportSimpleEvent(SimpleEvent.OPEN_FAPHUB_CATEGORY, it.name)
-                        navController.navigate(categoryEntryApi.open(it))
+                        //navController.navigate(categoryEntryApi.open(it))
                     }
-                )*/
+                )
             },
             installedTabComposable = {
                 /*

@@ -1,18 +1,26 @@
 import androidx.compose.desktop.ui.tooling.preview.Preview
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
 import com.arkivanov.decompose.DefaultComponentContext
 import com.arkivanov.decompose.extensions.compose.jetbrains.lifecycle.LifecycleController
 import com.arkivanov.essenty.lifecycle.LifecycleRegistry
+import com.flipperdevices.bridge.dao.hideKoin
+import com.flipperdevices.core.ui.errors.impl.fapHubKoin
 import com.flipperdevices.core.ui.theme.FlipperTheme
+import com.flipperdevices.core.ui.theme.LocalPallet
 import com.flipperdevices.faphub.appcard.composable.AppCard
+import com.flipperdevices.faphub.catalogtab.impl.catalogTabKoin
 import com.flipperdevices.faphub.dao.network.koinDao
 import com.flipperdevices.faphub.dao.network.ktorfit.koinKtorfit
+import com.flipperdevices.faphub.target.flipperTargetKoin
 import com.flipperdevices.main.impl.mainScreenKoin
 import com.lionzxy.flipperapp.navigation.DefaultRootComponent
 import com.lionzxy.flipperapp.navigation.RootContent
@@ -43,7 +51,9 @@ fun App(koin: Koin, kamelConfig: KamelConfig) {
                     DefaultRootComponent(
                         DefaultComponentContext(lifecycle = lifecycle),
                         koin
-                    )
+                    ),
+                    modifier = Modifier.fillMaxSize()
+                        .background(LocalPallet.current.background)
                 )
             }
         }
@@ -63,7 +73,11 @@ fun main() {
         modules(
             koinDao(),
             koinKtorfit(),
-            mainScreenKoin()
+            mainScreenKoin(),
+            fapHubKoin(),
+            catalogTabKoin(),
+            hideKoin(),
+            flipperTargetKoin()
         )
     }
     application {
