@@ -18,6 +18,7 @@ ksp = "1.9.20-1.0.14" # https://github.com/google/ksp/releases
 compose-kamel = { module = "media.kamel:kamel-image", version.ref = "kamel" }
 compose-paging = { module = "androidx.paging:paging-common", version.ref = "compose-paging" }
 compose-decompose = { module = "com.arkivanov.decompose:decompose", version.ref = "decompose" }
+compose-decompose-jetbrains = { module = "com.arkivanov.decompose:extensions-compose-jetbrains", version.ref = "decompose"}
 
 kotlin-immutable-collections = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable", version.ref = "kotlin-immutable-collections" }
 kotlin-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serialization-json" }

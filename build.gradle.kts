@@ -21,6 +21,7 @@ dependencies {
     implementation(libs.compose.kamel)
     implementation(libs.compose.paging)
     implementation(libs.compose.decompose)
+    implementation(libs.compose.decompose.jetbrains)
 
     implementation(libs.ktor.client)
     implementation(libs.ktor.negotiation)
