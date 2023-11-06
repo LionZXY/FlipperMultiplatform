@@ -66,6 +66,7 @@ class USBSerialConnectionHolder : FlipperServiceApi, FlipperConnectionInformatio
                             runBlocking {
                                 reader.reset()
                                 requestStorage.removeIf { true }
+                                reader.initialize()
                             }
 
                             outputStream.write("start_rpc_session\r".toByteArray())

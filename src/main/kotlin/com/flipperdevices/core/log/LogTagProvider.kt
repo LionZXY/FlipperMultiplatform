@@ -9,30 +9,30 @@ interface LogTagProvider {
 }
 
 inline fun LogTagProvider.error(logMessage: () -> String) {
-    println(logMessage())
+    println("$TAG: ${logMessage()}")
 }
 
 inline fun LogTagProvider.error(error: Throwable?, logMessage: () -> String) {
     error?.printStackTrace()
-    println(logMessage())
+    println("$TAG: ${logMessage()}")
 }
 
 inline fun LogTagProvider.info(logMessage: () -> String) {
-    println(logMessage())
+    println("$TAG: ${logMessage()}")
 }
 
 inline fun LogTagProvider.verbose(logMessage: () -> String) {
-    println(logMessage())
+    println("$TAG: ${logMessage()}")
 }
 
 inline fun LogTagProvider.warn(logMessage: () -> String) {
-    println(logMessage())
+    println("$TAG: ${logMessage()}")
 }
 
 inline fun LogTagProvider.debug(logMessage: () -> String) {
-    println(logMessage())
+    println("$TAG: ${logMessage()}")
 }
 
 inline fun LogTagProvider.wtf(logMessage: () -> String) {
-    println(logMessage())
+    println("$TAG: ${logMessage()}")
 }
