@@ -38,6 +38,12 @@ dependencies {
 
     implementation(libs.ktorfit.lib)
     ksp(libs.ktorfit.ksp)
+
+    implementation(libs.protobuf.kotlinlite)
+    implementation(libs.protobuf.protoc)
+    implementation(libs.flipper.protobuf)
+
+    implementation(libs.jserial)
 }
 
 compose.desktop {

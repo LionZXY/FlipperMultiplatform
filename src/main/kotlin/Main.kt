@@ -70,7 +70,7 @@ fun main() {
         resourcesFetcher()
         // Available only on Desktop.
         // An alternative svg decoder
-        //batikSvgDecoder()
+        // batikSvgDecoder()
         httpFetcher {
             httpCache(DefaultHttpCacheSize)
             Logging {
@@ -78,6 +78,13 @@ fun main() {
                 logger = Logger.SIMPLE
             }
         }
+
+        // 100 by default
+        imageBitmapCacheSize = 0
+        // 100 by default
+        imageVectorCacheSize = 0
+        // 100 by default
+        svgCacheSize = 0
 
     }
     val koin = startKoin {

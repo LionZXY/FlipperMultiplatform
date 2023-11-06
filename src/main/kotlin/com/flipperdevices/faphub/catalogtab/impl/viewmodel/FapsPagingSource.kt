@@ -17,11 +17,12 @@ class FapsPagingSource(
 ) : OffsetAndLimitPagingSource<FapItemShort>(FAPS_PAGE_SIZE) {
     override val TAG = "FapsPagingSource"
     override suspend fun load(offset: Int, limit: Int): List<FapItemShort> {
-        return fapNetworkApi.getAllItem(
+        val resultItems =  fapNetworkApi.getAllItem(
             sortType = sortType,
             offset = offset,
             limit = limit,
             target = target
         ).getOrThrow().filterNot { hiddenItems.contains(it.id) }
+        return resultItems
     }
 }
