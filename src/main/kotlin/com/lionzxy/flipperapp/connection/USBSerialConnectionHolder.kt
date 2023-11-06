@@ -19,7 +19,7 @@ import java.io.InputStream
 import java.lang.Runnable
 import java.nio.charset.Charset
 
-private const val FLIPPER_COM_PORT = "/dev/cu.usbmodemflip_Engonbun1/"
+private const val FLIPPER_COM_PORT = "/dev/cu.usbmodemflip_Engonbun1"
 private val FLOOD_END_STRING = "\r\n\r\n>: ".toByteArray().map { it.toUByte() }
 
 private val scope = GlobalScope + Dispatchers.Default
@@ -60,6 +60,7 @@ class USBSerialConnectionHolder : FlipperServiceApi, FlipperConnectionInformatio
                     230400, 8, SerialPort.ONE_STOP_BIT, SerialPort.NO_PARITY
                 )
                 val portOpened = serialPort.openPort()
+                serialPort.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 0, 0);
                 println("Port is opened: $portOpened")
                 if (portOpened) {
                     connectionFlow.update { ConnectionState.Initializing }
@@ -116,9 +117,35 @@ private fun skipFlood(inputStream: InputStream) {
         val byte = inputStream.read()
         if (FLOOD_END_STRING[floodCurrentIndex].toInt() == byte) {
             floodCurrentIndex++
+        } else {
+            floodCurrentIndex = 0
         }
         if (floodCurrentIndex == FLOOD_END_STRING.size) {
             return
         }
     }
+}
+
+fun main() {
+    val serialPort = SerialPort.getCommPort(FLIPPER_COM_PORT)
+    serialPort.setComPortParameters(
+        230400, 8, SerialPort.ONE_STOP_BIT, SerialPort.NO_PARITY
+    )
+    serialPort.openPort(1000)
+    serialPort.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 0, 0);
+
+    try {
+        serialPort.inputStream.use { inputStream ->
+            val buffer = ByteArray(1024)
+            var result = 1
+            while (result > 0) {
+                result = inputStream.read(buffer)
+                println("Read $result bytes")
+                println(String(buffer.take(result).toByteArray(), Charset.defaultCharset()))
+            }
+        }
+    } finally {
+        serialPort.closePort()
+    }
+
 }
