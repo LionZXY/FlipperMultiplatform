@@ -7,7 +7,7 @@ import com.flipperdevices.faphub.catalogtab.impl.viewmodel.FapsListViewModel
 import org.koin.dsl.module
 
 fun catalogTabKoin() = module {
-    single<CatalogTabApi> { CatalogTabApiImpl(get()) }
+    single<CatalogTabApi> { CatalogTabApiImpl(get(), get()) }
     single { FapsListViewModel(get(), get(), get()) }
     single { CategoriesViewModel(get(), get()) }
 }

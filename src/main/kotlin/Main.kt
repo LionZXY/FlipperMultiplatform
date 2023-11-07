@@ -24,6 +24,7 @@ import com.flipperdevices.faphub.appcard.composable.AppCard
 import com.flipperdevices.faphub.catalogtab.impl.catalogTabKoin
 import com.flipperdevices.faphub.dao.network.koinDao
 import com.flipperdevices.faphub.dao.network.ktorfit.koinKtorfit
+import com.flipperdevices.faphub.installation.button.impl.buttonKoin
 import com.flipperdevices.faphub.installation.manifest.manifestKoin
 import com.flipperdevices.faphub.target.flipperTargetKoin
 import com.flipperdevices.main.impl.mainScreenKoin
@@ -117,7 +118,8 @@ fun main() {
             hideKoin(),
             flipperTargetKoin(),
             koinConnection(),
-            manifestKoin()
+            manifestKoin(),
+            buttonKoin()
         )
     }
     val serviceApi = koin.koin.get<FlipperServiceApi>() as USBSerialConnectionHolder

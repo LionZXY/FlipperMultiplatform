@@ -6,10 +6,15 @@ import com.flipperdevices.faphub.catalogtab.impl.composable.ComposableCatalogTab
 import com.flipperdevices.faphub.dao.api.model.FapCategory
 import com.flipperdevices.faphub.dao.api.model.FapItemShort
 import com.flipperdevices.faphub.errors.api.FapHubComposableErrorsRenderer
+import com.flipperdevices.faphub.installation.button.api.FapButtonSize
+import com.flipperdevices.faphub.installation.button.api.FapInstallationUIApi
+import com.flipperdevices.faphub.installation.button.api.toFapButtonConfig
+import com.flipperdevices.faphub.installation.button.impl.api.FapInstallationUIApiImpl
 
 class CatalogTabApiImpl(
     //private val fapInstallationUIApi: FapInstallationUIApi,
-    private val errorsRenderer: FapHubComposableErrorsRenderer
+    private val errorsRenderer: FapHubComposableErrorsRenderer,
+    private val buttonInstallationUIApiImpl: FapInstallationUIApi,
 ) : CatalogTabApi {
     @Composable
     override fun ComposableCatalogTab(
@@ -21,11 +26,11 @@ class CatalogTabApiImpl(
             onCategoryClick = onCategoryClick,
             errorsRenderer = errorsRenderer,
             installationButton = { fapItem, modifier ->
-                /* fapInstallationUIApi.ComposableButton(
-                     config = fapItem?.toFapButtonConfig(),
-                     modifier = modifier,
-                     fapButtonSize = FapButtonSize.COMPACTED
-                 )*/
+                buttonInstallationUIApiImpl.ComposableButton(
+                    config = fapItem?.toFapButtonConfig(),
+                    modifier = modifier,
+                    fapButtonSize = FapButtonSize.COMPACTED
+                )
             }
         )
     }
