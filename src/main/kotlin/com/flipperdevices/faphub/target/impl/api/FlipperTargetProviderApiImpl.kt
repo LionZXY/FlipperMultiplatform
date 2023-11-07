@@ -32,7 +32,7 @@ class FlipperTargetProviderApiImpl(
         }
     }
 
-    override fun getFlipperTarget() = targetFlow.asStateFlow()
+    override fun getFlipperTarget() = MutableStateFlow(FlipperTarget.NotConnected)
 
     private suspend fun subscribe() {
         info { "Start subscribe" }

@@ -1,26 +1,25 @@
 package com.lionzxy.flipperapp.connection
 
 import com.fazecast.jSerialComm.SerialPort
-import com.flipperdevices.bridge.api.manager.FlipperRequestApi
 import com.flipperdevices.bridge.api.manager.delegates.FlipperConnectionInformationApi
 import com.flipperdevices.bridge.api.manager.ktx.state.ConnectionState
-import com.flipperdevices.bridge.api.manager.service.FlipperVersionApi
+import com.flipperdevices.bridge.api.manager.ktx.state.FlipperSupportedState
 import com.flipperdevices.bridge.impl.manager.PeripheralResponseReader
-import com.flipperdevices.bridge.impl.utils.ByteEndlessInputStream
 import com.flipperdevices.bridge.service.api.FlipperServiceApi
-import com.flipperdevices.protobuf.Flipper
 import com.lionzxy.flipperapp.connection.sender.FlipperFetcher
 import com.lionzxy.flipperapp.connection.sender.FlipperRequestStorage
 import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import java.io.InputStream
-import java.lang.Runnable
 import java.nio.charset.Charset
+import java.time.Duration
+import java.util.concurrent.*
+
 
 private const val FLIPPER_COM_PORT = "/dev/cu.usbmodemflip_Engonbun1"
-private val FLOOD_END_STRING = "\r\n\r\n>: ".toByteArray().map { it.toUByte() }
+private val FLOOD_END_STRING = "\r\n\r\n>: ".toByteArray()
+private val COMMAND = "start_rpc_session\r".toByteArray()
 
 private val scope = GlobalScope + Dispatchers.Default
 
@@ -43,7 +42,7 @@ class USBSerialConnectionHolder : FlipperServiceApi, FlipperConnectionInformatio
 
 
     fun init() {
-        serialConnectionThread.start()
+        //serialConnectionThread.start()
     }
 
     override fun run() {
@@ -62,18 +61,21 @@ class USBSerialConnectionHolder : FlipperServiceApi, FlipperConnectionInformatio
                     connectionFlow.update { ConnectionState.Initializing }
                     serialPort.inputStream.use { inputStream ->
                         serialPort.outputStream.use { outputStream ->
-                            skipFlood(inputStream)
+                            skipFlood(inputStream, FLOOD_END_STRING.map { it.toUByte() })
+                            outputStream.write(COMMAND)
+                            outputStream.flush()
+                            readUntilAvailable(inputStream)
+
                             runBlocking {
-                                reader.reset()
-                                requestStorage.removeIf { true }
                                 reader.initialize()
                             }
-
-                            outputStream.write("start_rpc_session\r".toByteArray())
                             val fetcher = FlipperFetcher(requestStorage, outputStream)
                             fetcher.init(scope)
-                            connectionFlow.update { ConnectionState.RetrievingInformation }
+                            connectionFlow.update { ConnectionState.Ready(FlipperSupportedState.READY) }
                             readStreamUntilStop(inputStream, reader)
+                            runBlocking {
+                                reader.reset()
+                            }
                         }
                     }
                 }
@@ -103,21 +105,40 @@ private fun readStreamUntilStop(inputStream: InputStream, reader: PeripheralResp
     var result = 1
     while (result > 0) {
         result = inputStream.read(buffer)
-        println("Read $result bytes")
-        reader.onReceiveBytes(buffer.take(result).toByteArray())
+        val readedBytes = buffer.take(result).toByteArray()
+        println("Read $result bytes with ${String(readedBytes, Charset.defaultCharset())}")
+        reader.onReceiveBytes(readedBytes)
     }
 }
 
-private fun skipFlood(inputStream: InputStream) {
+private fun readUntilAvailable(inputStream: InputStream) {
+    while (!Thread.interrupted()) {
+        val timeout: Duration = Duration.ofSeconds(1)
+        val executor = Executors.newSingleThreadExecutor()
+
+        val handler: Future<Any> = executor.submit<Any> {
+            inputStream.read()
+        }
+
+        try {
+            handler[timeout.toMillis(), TimeUnit.MILLISECONDS]
+        } catch (e: TimeoutException) {
+            handler.cancel(true)
+            return
+        }
+    }
+}
+
+private fun skipFlood(inputStream: InputStream, floodBytes: List<UByte>) {
     var floodCurrentIndex = 0
     while (!Thread.interrupted()) {
         val byte = inputStream.read()
-        if (FLOOD_END_STRING[floodCurrentIndex].toInt() == byte) {
+        if (floodBytes[floodCurrentIndex].toInt() == byte) {
             floodCurrentIndex++
         } else {
             floodCurrentIndex = 0
         }
-        if (floodCurrentIndex == FLOOD_END_STRING.size) {
+        if (floodCurrentIndex == floodBytes.size) {
             return
         }
     }
